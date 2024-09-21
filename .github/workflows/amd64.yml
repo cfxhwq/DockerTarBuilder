@@ -29,9 +29,10 @@ jobs:
           rm -f *-amd64.tgz
           echo 'rm succ'
           count=$((count+1))
-          echo "-->"${count}
+          echo "count-->"${count}
           images_del="${images_del} ${image}"
           if (( count % 10 == 0 )); then
+             echo "rmi-->"${images_del}
              docker rmi "${images_del}"
              images_del=""
              count=0
