@@ -24,17 +24,20 @@ jobs:
         images_del=""
         for image in "${image_array[@]}"; do
           docker pull "${image}" --platform "linux/amd64"
-          echo "pull succ"
           docker save "${image}" | gzip > "${image//\//_}-amd64.tgz"
           echo "save succ"
           tar -rf x86-64-images.tar.gz *-amd64.tgz
+          echo "tar succ"
           rm -f *-amd64.tgz
+          echo "rm succ"
           ((count++))
+          echo "count succ"
           images_del="${images_del} ${image}"
           if (( count % 10 == 0 )); then
              docker rmi "${images_del}"
              images_del=""
-          fi      
+          fi
+          echo "rmi succ"
         done
 
     - name: Compress the TAR files
