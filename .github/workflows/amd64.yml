@@ -23,7 +23,7 @@ jobs:
         count=0
         images_del=""
         for image in "${image_array[@]}"; do
-          docker pull "${image}" --platform "linux/amd64"
+          docker pull "${image}"
           docker save "${image}" | gzip > "${image//\//_}-amd64.tgz"
           tar -rf x86-64-images.tar.gz *-amd64.tgz
           rm -f *-amd64.tgz
